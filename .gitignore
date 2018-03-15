@@ -1,0 +1,11 @@
+rapport/*.aux
+rapport/*.log
+rapport/*.idx
+rapport/*.out
+rapport/*.toc
+rapport/*.pdf
+.ipynb_checkpoints/*
+.DS_Store
+*.DS_Store
+ignore/*
+*.csv
