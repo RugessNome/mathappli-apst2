@@ -1,0 +1,76 @@
+
+\chapter{Introduction}
+
+\section{Présentation du challenge}
+
+PriceMinister est une entreprise et plateforme d'achat-vente en ligne jouant le rôle 
+d'intermédiaire entre acheteurs et vendeurs comprenant 17 millions d'utilisateurs inscrits
+en 2016. Avec environ 50 000 transactions par jour de produits classés an 14 rubriques 
+(Informatique, électroménager, loisirs, beauté, ...) c'est l'une des plateformes de commerce
+en ligne majeure en France. 
+
+Ce challenge vise à prédire si une transaction passée en ligne via le site PriceMinister
+a des chances d'aboutir à une réclamation de la part de l'acheteur, par exemple un colis 
+non reçu ou endommagé, et le cas échéant prédire le type de réclamation. Améliorer la 
+capacité de prédiction des réclamations est un des enjeux majeur de l'e-commerce car il 
+permet non seulement d'améliorer l'expérience utilisateur, mais aussi d'augmenter le chiffre 
+d'affaire en anticipant d'éventuels coûts en se focalisant sur les transactions à risques.
+
+\section{Présentation du jeu de données}
+
+Il s'agit donc d'un problème de classification multi-classe dont les classes à prédire sont :
+
+\begin{itemize}
+\item '-' : pas de réclamation
+\item 'WITHDRAWAL' : retrait de la commande
+\item 'SELLER_CANCEL_POSTERIORI' : le vendeur annule la commande
+\item 'NOT_RECEIVED' : colis non reçu
+\item ‘DIFFERENT' : produit différent de l'annonce
+\item 'DAMAGED' : produit endommagé
+\item 'FAKE' : le produit est un faux (arnaque)
+\item 'UNDEFINED' : réclamation d'un autre type
+\end{itemize}
+
+Le jeu de données comprend des données hétérogènes tels que le moyen de paiement, les
+départements ou pays du vendeur et de l'acheteur, le type de produit acheté :
+
+\begin{itemize}
+\item ID: identifiant de la commande
+\item SHIPPING_MODE: méthode de transport
+\item SHIPPING_PRICE: coût du transport, si existant
+\item WARRANTIES_FLG: True si une garantie a été prise par l'acheteur
+\item WARRANTIES_PRICE: prix de la garantie si existante
+\item CARD_PAYEMENT: indicatrice du moyen de paiement par carte bancaire
+\item COUPON_PAYEMENT: indicatrice du moyen de paiement avec un coupon discount 
+\item RSP_PAYEMENT: indicatrice du moyen de paiement avec des Rakuten Super Points
+\item WALLET_PAYMENT: indicatrice du moyen de paiement avec PriceMinister-Rakuten wallet
+\item PRICECLUB_STATUS: status de l'acheteur
+\item REGISTRATION_DATE: année d'enregistrement de l'acheteur
+\item PURCHASE_COUNT: nombre d'achats précédemment réalisés par l'acheteur
+\item BUYER_BIRTHDAY_DATE: année de naissance de l'acheteur
+\item BUYER_DEPARTMENT: département de l'acheteur
+\item BUYING_DATE: année et mois de l'achat
+\item SELLER_SCORE_COUNT: nombre de ventes précédemment réalisés par le vendeur
+\item SELLER_SCORE_AVERAGE: score du vendeur sur le site PriceMinister-Rakuten
+\item SELLER_COUNTRY: pays du vendeur
+\item SELLER_DEPARTMENT: département français du vendeur (-1 si vendeur à l'étranger)
+\item PRODUCT_TYPE: type de produit commandé
+\item PRODUCT_FAMILY: famille du produit commandé
+\item ITEM_PRICE: prix du produit acheté
+
+\end{itemize}
+
+Plusieurs problématiques sont soulevées par ce jeu de données. Dans un premier temps, 
+il est essentiel de mettre en relief l'ancienneté et la fiabilité à la fois du vendeur et 
+de l'acheteur en croisant les données en rapport avec les statuts, le nombre d'années 
+d'inscription sur le site et le nombre de ventes/commandes réalisées. De plus, les 
+nombreuses données géographiques devront être exploitées pour mettre an avant la distance
+parcouru par la commande. Le type et la famille de produit peuvent aussi s'avérer déterminant
+dans la prédiction de réclamations étant données que certains produits doivent être 
+plus sujets à certains types de plaintes telles que la casse. De la même manière certains
+types de transports peuvent être plus sujets à la casse ou à au retard de livraison. 
+Enfin, le mode de paiement et l'achat d'une garantie peuvent aussi d'une manière moins
+évidente influencer les réclamations.
+
+
+

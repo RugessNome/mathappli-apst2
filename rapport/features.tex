@@ -1,0 +1,59 @@
+
+\chapter{Feature Engineering}
+
+Cette section présente les principales transformations du jeu de données mises en oeuvre.
+Cela comprend en particulier la transformation des variables catégorielles en
+indicatrices ou dummy variables (SHIPPING_MODE, PRODUCT_FAMILY,...), le mapping des variables 
+ordinales en variables d'entiers (SHIPPING_PRICE, PURCHASE_COUNT, ...),
+compléter les valeurs manquantes et enfin créer de nouvelles variables.
+
+\textbf{Variables transformées :}
+
+\begin{itemize}
+\item REGISTRATION_DATE est transformée en BUYER_SENIORITY indiquant le nombre d'années
+d'ancienneté de l'utilisateur sur le site plutôt qu'une année 
+\item BUYER_BIRTHDAY_DATE est remplacée par BUYER_AGE pour la même raison
+\end{itemize}
+
+\textbf{Variables créées :}
+
+\begin{itemize}
+\item UNEXPERIENCED_BUYER pour les individus qui ont effectué moins de 5 achats sur le site
+\item VIP_SELLER pour les vendeurs ayant une note de 49/50
+\item BUYER_REGION et SELLER_REGION représentant les régions des vendeurs et acheteurs.
+Cette variables vient renforcer les variables BUYER_DEPARTMENT et SELLER_DEPARTMENT.
+\item BUYER_IS_ABROAD et SELLER_IS_ABROAD indiquant que le vendeur/acheteur est à l'étranger.
+\item SAME_REGION_BUYER_SELLER et SAME_DEPARTMENT_BUYER_SELLER pour indiquer si l'acheteur
+et le vendeur d'une commande sont issus da la même région ou du même département.
+\item SELLER_BUYER_REGION_DISTANCE distance en kms entre la ville principale de la région
+du vendeur et la ville principale de la région de l'acheteur. Cette variable, obtenue en 
+réalisant une matrice de distance relatives entre chaque région permet d'apporter une
+information supplémentaire quant à la distance approximativement parcourue lors de la 
+livraison lorsque le vendeur et l'acheteur sont en France. 
+\item SELLER_COUNTRY_DISTANCE indiquant la distance relative entre le pays du vendeur et la France. 
+Cette distance est échelonnée suivant une échelle de 0 à 4, 0 étant pour FRANCE METROPOLITAINE et 4 pour les 
+pays les plus éloignées tels que JAPON, AUSTRALIE. Cette variable vient donc prolonger la variable
+SELLER_BUYER_REGION_DISTANCE lorsque le vendeur est à l'étranger.
+\end{itemize}
+
+\textbf{Remplacement des valeurs manquantes :}
+
+\begin{itemize}
+\item  BUYER_AGE : méthode ffill
+\item WARRANTIES_PRICE : les valeurs manquantes correspondent au cas où l'utilisateur n'a 
+pas pris de garantie (même quantité de valeurs manquantes qu'il n'y a de False dans la 
+variable WARRANTIES_FLG) et sont donc mises à 0.
+\item  SHIPPING_PRICE : nous avons considéré que les valeurs nulles correspondent au cas
+où les frais de livraisons sont gratuits et donc mis ces valeurs à 0
+\end{itemize}
+
+\textbf{Cas particulier :}
+
+PRICECLUB_STATUS peut être vu comme une variable catégorielle nominale et être transformée
+en variables binaires. Cependant, il y a une hiérarchie entre les différents 
+status : UNSUBSCRIBED < REGULAR < PLATINUM < SILVER < GOLD. Nous avons donc préféré transformer
+cette variable en une variables d'entiers (0 pour UNSUBSCRIBED jusqu'à 4 pour GOLD).
+
+
+
+
