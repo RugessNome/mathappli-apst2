@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+
+
+<head> 
+    
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0oF6gwqCzaYyHt6bXnS0D7dXDnt6jyfo&libraries=geometry,places&language=fr"></script> 
+
+
+  <script type="text/javascript">
+    var geocoder;
+
+    /*
+     * Queries Google Geocoder Service and returns the property requested.
+     * @param {String} address
+     * @param {String} property = {long_name|lat|lng} 
+     */
+
+    var directionsService = new google.maps.DirectionsService();
+
+    function initialize(city_list) {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      var chicago = new google.maps.LatLng(48.856614,2.352222);
+      var myOptions = {
+        zoom: 7,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: chicago,
+        disableDefaultUI: true,
+        scrollwheel: false,
+      }
+
+      calcRoutes(city_list);
+    }
+
+    function calcRoute(start, end, name1, name2) {
+      //var start = 'Nantes, France';
+      //var end = 'Marseille, France';
+
+      var request = {
+        origin: start, 
+        destination: end,
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
+      };
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          var distanciaRuta = response.routes[0].legs[0].distance.text;
+          distanciaRuta = distanciaRuta.substring(0, distanciaRuta.length-3)
+          document.getElementById(name1).innerHTML =  distanciaRuta ;
+          document.getElementById(name2).innerHTML =  distanciaRuta ;
+        }
+      });
+
+    }
+    
+    function calcRoutes(city_list_0){
+      
+      var city_list = Array(city_list_0.length)
+      for (var i = 0; i < city_list.length; i++) { 
+        city_list[i] = city_list_0[i].concat(", France")
+      }      
+      for (var i = 0; i < city_list.length; i++) {
+        for (var j = 0; j < city_list.length; j++) {
+          var name1 = "d".concat(i.toString()).concat("_").concat(j.toString())
+          var name2 = "d".concat(j.toString()).concat("_").concat(i.toString())
+          if (i==j){
+            var distanciaRuta = "0";
+            document.getElementById(name1).innerHTML =  distanciaRuta ;
+          } 
+          else if (j>i){
+            //initialize(city_list[i], city_list[j], name)
+            setTimeout(calcRoute, 1000*(100*i+j), city_list[i], city_list[j], name1, name2);
+          }
+        }
+      }
+      
+    }
+    
+   
+</script>
+  
+</head>
