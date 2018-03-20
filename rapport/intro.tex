@@ -12,9 +12,9 @@ en ligne majeure en France.
 Ce challenge vise à prédire si une transaction passée en ligne via le site PriceMinister
 a des chances d'aboutir à une réclamation de la part de l'acheteur, par exemple un colis 
 non reçu ou endommagé, et le cas échéant prédire le type de réclamation. Améliorer la 
-capacité de prédiction des réclamations est un des enjeux majeur de l'e-commerce car il 
+capacité de prédiction des réclamations est un des enjeux majeurs de l'e-commerce car il 
 permet non seulement d'améliorer l'expérience utilisateur, mais aussi d'augmenter le chiffre 
-d'affaire en anticipant d'éventuels coûts en se focalisant sur les transactions à risques.
+d'affaires en anticipant d'éventuels coûts en se focalisant sur les transactions à risques.
 
 \section{Présentation du jeu de données}
 
@@ -31,7 +31,7 @@ Il s'agit donc d'un problème de classification multi-classe dont les classes à
 \item 'UNDEFINED' : réclamation d'un autre type
 \end{itemize}
 
-Le jeu de données comprend des données hétérogènes tels que le moyen de paiement, les
+Le jeu de données comprend des données hétérogènes telles que le moyen de paiement, les
 départements ou pays du vendeur et de l'acheteur, le type de produit acheté :
 
 \begin{itemize}
@@ -50,7 +50,7 @@ départements ou pays du vendeur et de l'acheteur, le type de produit acheté :
 \item BUYER_BIRTHDAY_DATE: année de naissance de l'acheteur
 \item BUYER_DEPARTMENT: département de l'acheteur
 \item BUYING_DATE: année et mois de l'achat
-\item SELLER_SCORE_COUNT: nombre de ventes précédemment réalisés par le vendeur
+\item SELLER_SCORE_COUNT: nombre de ventes précédemment réalisées par le vendeur
 \item SELLER_SCORE_AVERAGE: score du vendeur sur le site PriceMinister-Rakuten
 \item SELLER_COUNTRY: pays du vendeur
 \item SELLER_DEPARTMENT: département français du vendeur (-1 si vendeur à l'étranger)
@@ -68,7 +68,7 @@ nombreuses données géographiques devront être exploitées pour mettre an avan
 parcouru par la commande. Le type et la famille de produit peuvent aussi s'avérer déterminant
 dans la prédiction de réclamations étant données que certains produits doivent être 
 plus sujets à certains types de plaintes telles que la casse. De la même manière certains
-types de transports peuvent être plus sujets à la casse ou à au retard de livraison. 
+types de transports peuvent être plus sujets à la casse ou au retard de livraison. 
 Enfin, le mode de paiement et l'achat d'une garantie peuvent aussi d'une manière moins
 évidente influencer les réclamations.
 

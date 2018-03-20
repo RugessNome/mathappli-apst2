@@ -10,7 +10,7 @@ existantes ou la création de nouveaux features va émerger.
 \section{Résumé statistique et première observations}
 
 Le jeu de données de test est composée de 99 995 observations.
-Le jeu de données d'entrainement est composé de 10 000 observations dont les fréquences 
+Le jeu de données d'entraînement est composé de 100 000 observations dont les fréquences 
 de chacun des types de réclamations sont les suivantes :
 
 \begin{itemize}
@@ -25,7 +25,7 @@ de chacun des types de réclamations sont les suivantes :
 \end{itemize}
 
 On note qu'il y a donc 50\% de réclamations et 50\% de non réclamation sur les données 
-d'entraînement. De plus, les fréquences de types de réclamations ne sont pas équilibrées,
+d'entraînement. De plus, les fréquences des types de réclamations ne sont pas équilibrées,
 avec notamment une fréquence très basse pour la déclaration de faux (0,2\%). Pour comparer
 nos modèles nous utiliserons donc une métrique de type AUC, plus adaptée à ce type de 
 problème. 
@@ -98,7 +98,7 @@ augmenterait considérablement le nombre de variables :
 \item SELLER_DEPARTMENT 98 valeurs distinctes
 \end{itemize}
 
-Nous remarquons de plus, que le jeu de données possède 3238 lignes dupliquées. Les
+Nous remarquons de plus que le jeu de données possède 3238 lignes dupliquées. Les
 données ont été rendues anonymes, on ne peut donc pas identifier les acheteurs ou les
 vendeurs mais il est cependant envisageable que certains individus apparaissent dans 
 plusieurs transactions similaires.
@@ -114,12 +114,12 @@ les 50\% de moyenne.
 MONDIAL_RELAY_PREPAYE (46\%), SUIVI (46\%) and NORMAL (47\%) sont les moyens de livraison
 les plus fiables.
 
-La livraison NORMAL a le taux le plus élevé de réclamation NOT_RECEIVED (16\%) mais a les taux
+La livraison NORMAL a le taux le plus élevé de réclamations NOT_RECEIVED (16\%) mais a les taux
 de WITHDRAWAL (4\%) et de UNDEFINED (2\%) les plus bas
 
-CHRONOPOST a le plus haut taux de réclamation DAMAGED.
+CHRONOPOST a le plus haut taux de réclamations DAMAGED.
 
-Paradoxalement, le taux de réclamation évolue positivement avec le coût de la livraison.
+Paradoxalement, le taux de réclamations évolue positivement avec le coût de la livraison.
 En particulier les réclamations UNDEFINED et WITHDRAWAL sont plus probables lorsque
 le prix du transport est élevé. 
 
@@ -128,7 +128,7 @@ le prix du transport est élevé.
 \end{center}
 
 De plus, il y a une corrélation claire entre SHIPPING_MODE et SHIPPING_PRICE. Par exemple,
-un SHIPPING_PRICE de plus de 20 a de grandes chance d'être de type RECOMMANDE.
+un SHIPPING_PRICE de plus de 20 a de grandes chances d'être de type RECOMMANDE.
 
 \textbf{WARRANTIES_FLG et WARRANTIES_PRICE :}
 
@@ -141,7 +141,7 @@ réclamation.
 
 \textbf{PRICECLUB_STATUS :}
 
-Cette variable est liée au nombre de points accumulé en effectuant des actions telles que
+Cette variable est liée au nombre de points accumulés en effectuant des actions telles que
 vendre des produits, parrainer un ami ou encore utiliser l'application PrimeMinister.
 Avec ces points l'utilisateur peut occasionnellement bénéficier d'offres et de réductions.
 
@@ -157,7 +157,7 @@ Nous observons que les récents utilisateurs ont plus tendance à porter de réc
 Il est notable que les acheteurs avec de l'expérience sur le site sont moins susceptibles
 de porter des réclamations WITHDRAWAL et UNDEFINED. Cela fait sens car un utilisateur 
 habitué a moins de chance de s'être trompé dans sa commande et de la retirer.
-Cependant ces acheteurs ont aussi moins tendance a ne pas recevoir leur colis ou à recevoir  
+Cependant ces acheteurs ont aussi moins tendance à ne pas recevoir leur colis ou à recevoir  
 un colis endommagé. Ceci peut s'expliquer par les habitudes des consommateurs qui avec le 
 temps n'achètent qu'auprès des vendeurs en qui ils ont confiance.
 
@@ -175,27 +175,27 @@ supplémentaire pour mettre en avant le fait qu'un utilisateur soit novice ou no
 \end{center}
 
 Une corrélation peu évidente peut être observée entre l'âge et les réclamations. 
-En effet, les individus plus jeunes ont probabilité légèrement plus grande que la moyenne
-de porter un réclamation de type NOT_RECEIVED.
+En effet, les individus plus jeunes ont une probabilité légèrement plus grande que la moyenne
+de porter une réclamation de type NOT_RECEIVED.
 
 \textbf{BUYER_DEPARTMENT, SELLER_DEPARTMENT et SELLER_COUNTRY:}
 
 Pour observer plus facilement l'influence de la localisation des acheteurs et vendeurs
-nous avons crées une variable supplémentaire permettant d'identifier utilisateurs par leur
+nous avons créé une variable supplémentaire permettant d'identifier les utilisateurs par leur
 région au lieu de leur département. 
 
-Il n'y a pas cependant pas d'influence visible entre la région de l'acheteur et le type de
+Il n'y a cependant pas d'influence visible entre la région de l'acheteur et le type de
 réclamation si l'acheteur vit en France. Nous pouvons seulement noter qu'en Ile de France
-et dans la région PACA les colis sont légèrement plus susceptibles de ne pas arrivés
+et dans la région PACA les colis sont légèrement plus susceptibles de ne pas arriver
 à destination.
 
-Bien entendu, nous pouvons observé que les colis venant de l'étranger sont plus sujets à 
+Bien entendu, nous pouvons observer que les colis venant de l'étranger sont plus sujets à 
 réclamation. Il peut donc être intéressant de créer une variable binaire supplémentaire 
 pour mettre l'accent sur le fait que le colis vienne de l'étranger ou non.
 
 On peut noter cependant que certains pays européens ont des taux de réclamations 
 proches de la moyenne voir meilleurs (GERMANY : 39,1\%, BELGIUM : 41,8\%, LUXEMBOURG : 41,5\%),
-alors que pour les colis provenant d'autres pays européens proches ont un taux de réclamations pour colis 
+alors que les colis provenant d'autres pays européens proches ont un taux de réclamations pour colis 
 non reçu beaucoup plus élevé que la moyenne (19,2\% pour UNITED KINGDOM). 
 Il semble donc difficile de regrouper ces pays en catégories et il sera nécessaire de créer
 une indicatrice pour chacun de ces pays lors de la phase de feature engineering.
@@ -205,12 +205,12 @@ une indicatrice pour chacun de ces pays lors de la phase de feature engineering.
 Cette variable est codé au format 'MM/AAAA' dont nous extrayons uniquement le mois qui est ici 
 l'élément qui nous intéressent car toutes les ventes sont réalisées sur l'année 2017.
 
-Nous remarquons d'ailleurs que les données s'arrête au mois d'octobre, ce qui est regrettable
+Nous remarquons d'ailleurs que les données s'arrêtent au mois d'octobre, ce qui est regrettable
 puisque la période de Noël, particulièrement prolifique pour les sites de e-commerce, n'est 
 pas représentée. Il aurait été intéressant de visualiser l'impact de cette période sur les
 réclamations.
 
-Dans ce jeu de données, le mois de Janvier est celui où le plus de commande sont réalisées,
+Dans ce jeu de données, le mois de Janvier est celui où le plus de commandes sont réalisées,
 et c'est aussi le mois où le plus de réclamations sont faites. De même, le mois d'Octobre
 est le plus calme en terme de ventes mais aussi en terme de pourcentage de réclamations
 faites. La tendance est donc que plus il y a de flux de commandes plus il risque d'y avoir
@@ -225,12 +225,12 @@ notes moyennes sont les plus fiables. En particulier, les vendeurs avec une note
 de réclamations). Il peut donc être interessant de leur attribuer une variable binaire pour 
 renforcer cet écart de fiabilité.
 
-Cependant, il faut de noter que très petits nombre de vendeurs (51) ont une note moyenne 
-maximale de 50/50 et ont cependant un taux de réclamation moyen très élevé (72,5\%).
-Ces vendeurs sont peu être des comptes fake qui ont réussis à obtenir la note maximale
-pour attirer des clients ou bien des anomalies. Dans tous les cas, il ne faut pas les 
-classer parmi les bon vendeurs. Il ne faut pas non plus les considérer comme des outliers
-et les retirer du jeu de données car le taux de réclamation qui est lié à ces vendeurs est 
+Cependant, il faut noter qu'un très petit nombre de vendeurs (51) ont une note moyenne 
+maximale de 50/50 et ont cependant un taux de réclamations moyen très élevé (72,5\%).
+Ces vendeurs sont peut-être des comptes fake qui ont réussis à obtenir la note maximale
+pour attirer des clients, ou bien des anomalies. Dans tous les cas, il ne faut pas les 
+classer parmi les bons vendeurs. Il ne faut pas non plus les considérer comme des outliers
+et les retirer du jeu de données car le taux de réclamations qui est lié à ces vendeurs est 
 significatif et peut contribuer à améliorer notre prédicteur.
 
 \begin{center}
@@ -250,10 +250,10 @@ endommagé lors du transport.
 
 \textbf{ITEM_PRICE :}
 
-Les produits les moins cher sont moins susceptible de mener à une réclamation.
+Les produits les moins chers sont moins susceptibles de mener à une réclamation.
 En particulier les réclamations pour FAKE sont quasiment toujours des produits peu chers.
-De même ce sont surtout les achats peu chers qui risque de ne pas arriver à destination.
-Les produits couteux ont en revanche plus de chance de mener à un retrait de commande.
+De même ce sont surtout les achats peu chers qui risquent de ne pas arriver à destination.
+Les produits coûteux ont en revanche plus de chance de mener à un retrait de commande.
 
 Les produits dont le prix est compris dans l'intervalle 100<500 ont typiquement plus de
 chance d'arriver endommagé. Cela correspond au prix des appareils électroniques qui comme
