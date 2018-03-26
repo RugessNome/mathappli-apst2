@@ -1,8 +1,8 @@
 
 \chapter{Description du jeu de données}
 
-Dans cette partie nous nous attacherons de détailler l'étude réalisée sur le jeu de données.
-Cette étude détaillée permet notamment de faire ressortir les corrélations entre les variables
+Dans cette partie nous détaillerons l'étude réalisée sur le jeu de données.
+Cette étude permet notamment de faire ressortir les corrélations entre les variables
 et de mettre en avant les variables les plus déterminantes dans la prédiction du type de 
 réclamation. De plus c'est à cette occasion que la réflexion sur la transformation des variables
 existantes ou la création de nouveaux features va émerger.
@@ -68,7 +68,7 @@ La plupart des variables sont catégorielles :
 	\end{itemize}
 \end{itemize}
 
-Cependant, ces variables quantitatives pourront être transformées en variables catégorielles.
+Les variables quantitatives pourront ici être transformées en variables catégorielles.
 La date de naissance de l'acheteur pourra par exemple être convertie en catégories d'âge.    
     
 Nous pouvons de plus noter que certaines variables ont beaucoup de valeurs manquantes, il 
@@ -203,7 +203,7 @@ une indicatrice pour chacun de ces pays lors de la phase de feature engineering.
 \textbf{BUYING_DATE :}
 
 Cette variable est codé au format 'MM/AAAA' dont nous extrayons uniquement le mois qui est ici 
-l'élément qui nous intéressent car toutes les ventes sont réalisées sur l'année 2017.
+l'élément qui nous intéresse car toutes les ventes sont réalisées sur l'année 2017.
 
 Nous remarquons d'ailleurs que les données s'arrêtent au mois d'octobre, ce qui est regrettable
 puisque la période de Noël, particulièrement prolifique pour les sites de e-commerce, n'est 
@@ -225,17 +225,18 @@ notes moyennes sont les plus fiables. En particulier, les vendeurs avec une note
 de réclamations). Il peut donc être interessant de leur attribuer une variable binaire pour 
 renforcer cet écart de fiabilité.
 
+\begin{center}
+\includegraphics[scale=0.5]{assets/sellerscore} 
+\end{center}
+
 Cependant, il faut noter qu'un très petit nombre de vendeurs (51) ont une note moyenne 
-maximale de 50/50 et ont cependant un taux de réclamations moyen très élevé (72,5\%).
+maximale de 50/50 et ont cependant un taux de réclamations moyen très élevé (72,5\%) comme
+on peut le voir ci-dessus.
 Ces vendeurs sont peut-être des comptes fake qui ont réussis à obtenir la note maximale
 pour attirer des clients, ou bien des anomalies. Dans tous les cas, il ne faut pas les 
 classer parmi les bons vendeurs. Il ne faut pas non plus les considérer comme des outliers
 et les retirer du jeu de données car le taux de réclamations qui est lié à ces vendeurs est 
 significatif et peut contribuer à améliorer notre prédicteur.
-
-\begin{center}
-\includegraphics[scale=0.5]{assets/sellerscore} 
-\end{center}
 
 Nous observons de plus une corrélation importante et prévisible entre SELLER_SCORE_COUNT et 
 SELLER_SCORE_AVERAGE.
@@ -256,8 +257,8 @@ De même ce sont surtout les achats peu chers qui risquent de ne pas arriver à 
 Les produits coûteux ont en revanche plus de chance de mener à un retrait de commande.
 
 Les produits dont le prix est compris dans l'intervalle 100<500 ont typiquement plus de
-chance d'arriver endommagé. Cela correspond au prix des appareils électroniques qui comme
-nous l'avons observé précédemment sont plus souvent endommagé lors du transport.
+chance d'arriver endommagé. Cela correspond au prix des appareils électroniques qui, comme
+nous l'avons observé précédemment, sont plus souvent endommagés lors du transport.
 
 
 
